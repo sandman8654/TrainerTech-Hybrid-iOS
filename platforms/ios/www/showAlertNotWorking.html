@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Capture Photo</title>
+
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script type="text/javascript" charset="utf-8">
+
+    // Wait for device API libraries to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        alert(1);
+        // Empty
+    }
+
+    // process the confirmation dialog result
+    function alertDismissed() {
+        return 'F';
+    }
+
+    // Show a custom confirmation dialog
+    //
+    function showAlert(msg){
+        navigator.notification.alert(
+            'TEST',
+            alertDismissed,
+            'Trainer Tech',
+            'OK'
+        );
+    }
+
+    </script>
+  </head>
+  <body>
+    <p><a href="#" onclick="showAlert('TEST MESSAGE'); return false;">Show Alert</a></p>
+  </body>
+</html>

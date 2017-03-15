@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <script src="./jquery-1.11.0.min.js"></script>
+    <script src="canvas2image.js"></script>
+    <script>
+        $(document).ready(function(){
+            var imageObj, canvas, context;
+            
+            imageObj = new Image();
+            imageObj.onload = function() {
+                canvas = document.createElement("canvas");
+                canvas.id = 'canvasTag';
+                canvas.width = imageObj.width;
+                canvas.height = imageObj.height;
+                context = canvas.getContext('2d');
+                context.drawImage(imageObj, 0, 0);
+                
+                var type = 'png';
+                var w = imageObj.width;
+                var h = imageObj.height;
+
+                var base64Image = Canvas2Image.convertToImage(canvas, w, h, type);
+
+                var newImg = new Image();
+                newImg.src = base64Image;
+
+                $("body").append(newImg);
+            };
+            imageObj.src = 'img_the_scream.jpg';
+        });
+    </script>
+    
+    <style>
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <p>Canvas</p>
+    <!-- <canvas id="myCanvas" width="612" height="612"></canvas> -->
+  </body>
+</html>  

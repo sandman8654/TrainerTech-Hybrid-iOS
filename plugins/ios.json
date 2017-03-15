@@ -1,0 +1,56 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "framework": {
+            "ImageIO.framework": {
+                "true": 1
+            },
+            "CoreLocation.framework": {
+                "false": 1
+            },
+            "CoreGraphics.framework": {
+                "false": 2
+            },
+            "AssetsLibrary.framework": {
+                "false": 1
+            },
+            "MobileCoreServices.framework": {
+                "false": 1
+            },
+            "AudioToolbox.framework": {
+                "true": 1
+            },
+            "SystemConfiguration.framework": {
+                "true": 1
+            }
+        },
+        "config.xml": {
+            "/*": {
+                "<feature name=\"Camera\"><param name=\"ios-package\" value=\"CDVCamera\" /></feature>": 1,
+                "<preference name=\"CameraUsesGeolocation\" value=\"false\" />": 1,
+                "<feature name=\"Notification\"><param name=\"ios-package\" value=\"CDVNotification\" /></feature>": 1,
+                "<feature name=\"NetworkStatus\"><param name=\"ios-package\" value=\"CDVConnection\" /></feature>": 1
+            }
+        },
+        "*-Info.plist": {
+            "NSLocationWhenInUseUsageDescription": {
+                "<string />": 1
+            }
+        }
+    },
+    "installed_plugins": {
+        "org.apache.cordova.camera": {
+            "PACKAGE_NAME": "trainertech.app.com"
+        },
+        "org.apache.cordova.dialogs": {
+            "PACKAGE_NAME": "trainertech.app.com"
+        },
+        "org.apache.cordova.network-information": {
+            "PACKAGE_NAME": "trainertech.app.com"
+        }
+    },
+    "dependent_plugins": {}
+}

@@ -1,0 +1,34 @@
+var wTime = strtotime ( workout.date + ' ' + workout.time );
+var tTime = get_timestamp();
+
+wTime = parseInt(wTime) + parseInt( 86400 ); // one day seconds = 86400
+
+if(wTime < tTime){
+  var updateAbility = false;
+}
+else{
+  var updateAbility = true;
+}
+
+
+
+
+if(flag==0 && exercise.status == 0){
+  if(updateAbility){	
+  	$('#workoutbtn').attr('onclick','return exerciseDetails('+exercise.id+', \''+ids+'\')')
+  }
+  else{
+  	// $('#workoutbtn').css('background', '#000');
+  	// $('#workoutbtn').css('color', '#000');
+  	$('ons-tabbar').remove();
+  }
+
+  flag=1;
+}
+
+
+
+if(updateAbility)
+  content +='<ons-col class="'+clos+' col ons-col-inner"><a href="#" onclick="return exerciseDetails('+exercise.id+', \''+ids+'\')"><span>'+parseInt(j)+'</span>'+exercise.name+'</a></ons-col>';
+else
+  content +='<ons-col class="'+clos+' col ons-col-inner"><a href="#" onclick="return false"><span>'+parseInt(j)+'</span>'+exercise.name+'</a></ons-col>';

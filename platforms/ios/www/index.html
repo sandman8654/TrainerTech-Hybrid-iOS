@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>MAIN PAGE</title>
+		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+		<script src="js/jquery-1.11.0.min.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				// $('iframe').css('height', parseInt($(window).height()) + 'px');
+				// $('body').css('height', parseInt($(window).height()) + 'px');
+			});
+		</script>
+		<script type="text/javascript" charset="utf-8">
+			var pictureSource;
+			var destinationType;
+			document.addEventListener("deviceready",onDeviceReady,false);
+			function onDeviceReady() {
+				window.localStorage.setItem('nowOnline', '0');
+
+				window.localStorage.setItem('currentMonth', '1');
+
+				pictureSource=navigator.camera.PictureSourceType;
+				destinationType=navigator.camera.DestinationType;
+
+				if(navigator.network && navigator.network.connection.type != Connection.NONE){
+					window.localStorage.setItem('online', '1');
+				}
+				else{
+					window.localStorage.setItem('online', '0');
+				}
+
+				document.addEventListener("online", onOnline, false);
+				document.addEventListener("offline", onOffline, false);
+				
+				setInterval(function(){
+					if(window.localStorage.getItem('showAlert') == 'SHOW'){
+						window.localStorage.setItem('showAlert', 'HIDE');
+						showAlert(window.localStorage.getItem('showAlertMsg'));
+					}
+
+					if(window.localStorage.getItem('captureImage') == 'YES'){
+						window.localStorage.setItem('captureImage', 'NO');
+						$("#captureImage").trigger('click');
+					}
+				},10);
+
+				showIframe();
+			}
+
+			function showIframe(){
+				$("body").append('<iframe style="border:none; width:100%; margin:0; padding:0;" src="monaca_index.html"></iframe>');
+
+				$('iframe').css('height', parseInt($(window).height()) + 'px');
+			}
+
+			function showAlert(msg) {
+				navigator.notification.alert(
+					msg,
+					alertDismissed,
+					'Trainer Tech',
+					'OK'
+				);
+			}
+
+			function alertDismissed() {
+				return 0;
+			}
+
+			function onOnline(){
+				window.localStorage.setItem('nowOnline', '1');
+				window.localStorage.setItem('online', '1');
+			}
+
+			function onOffline(){
+				window.localStorage.setItem('online', '0');
+			}
+
+			function onPhotoURISuccess(imageURI) {
+				window.localStorage.setItem('imageURI', imageURI);
+				/*
+				var largeImage = document.getElementById('proimage');
+				$('#imgstr').val(imageURI);
+				largeImage.style.display = 'block';
+				largeImage.src = "data:image/jpeg;base64," + imageURI;
+				*/
+			}
+
+			function getPhoto(source) {
+				navigator.camera.getPicture(onPhotoURISuccess, onFail, {
+					quality: 50,
+					destinationType: destinationType.DATA_URL,
+					sourceType: source,
+					allowEdit: true,
+					encodingType: Camera.EncodingType.JPEG
+				});
+			}
+
+			function onFail(message) {
+				showAlert('Failed because: ' + message);
+			}
+		</script>
+	</head>
+	<body style="margin:0; padding:0; overflow:hidden; background:#000;">
+		<div style="display:none;">
+			<button onclick="showAlert('222');">Alert</button> <br>
+			<button id="captureImage" onclick="getPhoto(pictureSource.PHOTOLIBRARY);">From Photo Library</button><br>
+			<img style="display:none;width:60px;height:60px;" id="smallImage" src="" />
+			<img style="display:none;" id="largeImage" src="" />
+		</div>
+	</body>
+</html>

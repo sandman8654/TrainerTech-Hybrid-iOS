@@ -1,0 +1,295 @@
+<ons-page class="center cont" ng-controller="checksession" >
+	<div class="modal special" id="modalbox" style="position:relative; display:none" >
+		<div class="block">
+			<header><img src="images/okey.png"></header>
+			<div class="container"> <p>Lets Start</p> Set 1</div>
+			<footer>
+			<a href="#" class="setone">Go</a>
+			<!-- <a href="#" onclick="return showRmodalbox('YES');">Go</a> -->
+			</footer>
+		</div>
+		<!-- <a href="#" onclick="return showRmodalbox('NO');">Cancel</a> -->
+		<a href="#" onclick="return hidebox();">Cancel</a>
+	</div>
+
+	<input type="hidden" id="resttime" value="0">
+	<div class="modal special" id="endtimebox" style="position:relative; display:none" >
+		<div class="block">
+			<header><img src="images/okey.png"></header>
+			<div class="container" ><p>Cool Down</p> <span  id="spendtime"></span></div>
+			<footer><a href="#" id="endGO" >Next</a></footer>
+		</div>
+		<!-- <a href="#" onclick="return showRmodalbox('NO');">Cancel</a> -->
+	</div>
+
+
+	<div class="modal special" id="setendtimebox" style="position:relative; display:none" >
+		<div class="block">
+			<header><img src="images/okey.png"></header>
+			<div class="container" ><p>Cool Down</p> <span id="setspendtime0" class="timer0">00:00</span></div>
+			<footer>
+			<a href="#" id="nextsetGO" >Next</a> <br>
+			</footer>
+		</div>
+			<a href="#" id="nextsetskip" onclick="hidesetendtimebox()" >Skip</a>
+		<!-- <a href="#" onclick="return showRmodalbox('NO');">Cancel</a> -->
+	</div>
+
+	<div class="modal special" id="cooldownmodal" style="position:relative; display:none">
+		<div class="block">
+			<header><img src="images/okey.png"></header>
+			<div class="container">
+			<p>Cool Down</p><span id="lasttime" class="timer0"></span></div>
+			<footer><a href="#" onclick="return show_finishedmodal()">Skip Cool Down</a></footer>
+		</div>
+		<a href="#" ng-click="ons.slidingMenu.setAbovePage('page4.html')">Quit Workout</a>
+	</div>
+
+	<div style="position: relative; display:none" id="finishedmodal" class="modal next">
+		<div class="block">
+			<header><img src="images/okey.png"></header>
+			<div class="container">
+				<div class="success">
+					<p>Success!</p>
+					<h3>You finished this round! <br> See you tomorrow</h3>
+				</div>									
+				<a style="margin:10px 18px;" id=""class="full blue returnhome homebtn0" href="#">Home</a>
+				
+				
+			</div>
+			<footer>
+				<h3>Notes (optional)</h3>
+				<!-- <span>Notes to trainer here ....</span> -->
+				<input type="text" style="width:100%" placeholder="Notes to trainer here ...." id="workout_notes">
+			</footer>		
+		</div>
+		<a  class="returnhome" style="color:#0091ae"  href="#">Send Notes</a>
+	</div>
+
+	<div class="modal next" id="setmodalbox" style="position:relative; display:none">
+		<div class="block">
+			<header><img src="images/okey.png"></header>
+			<div class="container" id="setsresults">				
+			</div>
+			<!-- <footer>
+				<h3>Notes (optional)</h3>
+				<textarea type="text" style="width:100%" placeholder="Notes to trainer here ...." id="exercise_notes"></textarea>
+			</footer> -->
+		</div>
+		<a href="#" onclick="return hidesetmodalbox();">Cancel</a>
+	</div>
+
+
+	<div class="modal next" id="Rmodalbox" style="position:relative; display:none">
+		<div class="block">
+			<header><img src="images/okey.png"></header>
+			<div class="container" id="results">
+				<!-- <div class="success">
+					<p>Success!</p>
+					<h3>You finished this round!</h3>
+				</div>
+				<div class="results left">
+					<h4>Results</h4>
+				</div>
+
+				<div class="bench">
+					<ons-row>
+					    <ons-col>Set 1</ons-col>
+					    <ons-col>Weight</ons-col>
+					    <ons-col>Reps</ons-col>
+				     </ons-row>
+				</div>
+				<div class="results left">
+					<ons-row>
+					    <ons-col></ons-col>
+				        <ons-col>
+				        	<div class="counter"><a href="#"><img src="images/al.png"></a>135<a href="#"><img src="images/ar.png"></a></div>
+				    	</ons-col>
+				        <ons-col>
+				        	<div class="counter"><a href="#"><img src="images/al.png"></a>15<a href="#"><img src="images/ar.png"></a></div>
+				        </ons-col>
+			      	</ons-row>
+				</div>
+
+				<div class="bench">
+					<ons-row>
+					    <ons-col>Set 2</ons-col>
+					    <ons-col>Weight</ons-col>
+					    <ons-col>Reps</ons-col>
+				     </ons-row>
+				</div>
+				<div class="results left">
+					<ons-row>
+					    <ons-col></ons-col>
+				        <ons-col>
+				        	<div class="counter"><a href="#"><img src="images/al.png"></a>135<a href="#"><img src="images/ar.png"></a></div>
+				    	</ons-col>
+				        <ons-col>
+				        	<div class="counter"><a href="#"><img src="images/al.png"></a>15<a href="#"><img src="images/ar.png"></a></div>
+				        </ons-col>
+			      	</ons-row>
+				</div>
+
+				<div class="bench">
+					<ons-row >
+					    <ons-col>Set 3</ons-col>
+					    <ons-col>Weight</ons-col>
+					    <ons-col>Reps</ons-col>
+				     </ons-row>
+				</div>
+				<div class="results left">
+					<ons-row>
+					    <ons-col></ons-col>
+				        <ons-col>
+				        	<div class="counter"><a href="#"><img src="images/al.png"></a>135<a href="#"><img src="images/ar.png"></a></div>
+				    	</ons-col>
+				        <ons-col>
+				        	<div class="counter"><a href="#"><img src="images/al.png"></a>15<a href="#"><img src="images/ar.png"></a></div>
+				        </ons-col>
+			      	</ons-row>
+				</div>
+				<a href="#" class="full blue" style="margin:10px 18px;" ng-click="ons.slidingMenu.setAbovePage('page2.html')">Next</a> -->
+			</div>
+			<footer>
+				<h3>Notes (optional)</h3>
+				<input type="text" style="width:100%" placeholder="Notes to trainer here ...." id="exercise_notes">
+			</footer>
+		</div>
+		<a href="#" onclick="return hideRbox();">Cancel</a>
+	</div>
+
+	<!-- <header>
+		<span class="userfullname"></span>
+		<div class="navi"><img src="images/menu.png" ng-click="ons.slidingMenu.toggleMenu()"></div>
+		<h1><img src="images/logo-hd.png"></h1>
+	</header> -->
+
+	<ons-toolbar class="onstoolbar">
+		<div class="left navigation-bar__title navigation-bar__left cusername t-a-c">
+			<div class="navi t-a-c" ng-click="ons.slidingMenu.toggleMenu()" ><img src="images/menu.png"></div>	
+		</div>
+		<div class="center navigation-bar__center centerlogoimage t-a-c">
+				<h1><img src="images/trainer_half_white.png"></h1>
+		</div>
+		<div class="right navigation-bar__title navigation-bar__right t-a-c">
+			<!-- <span class="userfullname"></span> -->
+		</div>
+	</ons-toolbar>
+<div id="hideonmodal">
+
+	<div class="imagin">
+		<img id="excerciseimage" trr="images/img2.jpg">
+		<div class="ttl" id="exercisename">
+			
+		</div>
+	</div>
+
+	<div class="light" id="exercisedesc">  </div>
+
+	<div class="bench" id="exercise_set" style="margin-bottom:70px" >
+		<ons-row class="lt">
+	        <ons-col>Set</ons-col>
+	        <ons-col>Weight</ons-col>	       
+	        <ons-col>Reps</ons-col>	       
+      	</ons-row>
+		
+	</div>
+
+	<!-- <div class="results left">
+		<h4>Results</h4>
+	</div>
+
+	<div class="bench">
+		<ons-row class="lt">
+		    <ons-col>Set</ons-col>
+		    <ons-col>Weight</ons-col>
+		    <ons-col>Reps</ons-col>
+	     </ons-row>
+	</div> -->
+	<div class="results left" id="results0" style="margin-bottom:50px" >
+		<!--<ons-row>
+			<ons-col class="rset">
+				<i>1</i> of <i>2</i>				
+			</ons-col>
+	        <ons-col>
+	        	<div class="counter">
+	        	<a href="#" class="left_weight"><img src="images/count-l.png"></a>
+	        		<span class="w_val">25</span>     		
+	        	<a href="#" class="right_weight"><img src="images/count-r.png"></a>
+	        	</div>
+	    	</ons-col>
+	        <ons-col>
+	        	<div class="counter">
+		        	<a href="#" class="left_reps"><img src="images/count-l.png"></a>
+		        	 <span class="r_val">45</span>
+		        	<a href="#" class="right_reps"><img src="images/count-r.png"></a>
+	        	</div>
+	        </ons-col>
+      	</ons-row>
+      	<ons-row>
+      		<ons-col class="rset">
+				<i>1</i> of <i>2</i>				
+			</ons-col>
+	        <ons-col>
+	        	<div class="counter">
+	        	<a href="#" class="left_weight"><img src="images/count-l.png"></a>
+	        		<span class="w_val">25</span>     		
+	        	<a href="#" class="right_weight"><img src="images/count-r.png"></a>
+	        	</div>
+	    	</ons-col>
+	        <ons-col>
+	        	<div class="counter">
+		        	<a href="#" class="left_reps"><img src="images/count-l.png"></a>
+		        	 <span class="r_val">45</span>
+		        	<a href="#" class="right_reps"><img src="images/count-r.png"></a>
+	        	</div>
+	        </ons-col>
+      	</ons-row>-->
+	</div>
+</div>
+</ons-page>
+<ons-tabbar id="tabbarbtm">
+<!-- <div class="full blue left"><a href="#" class="left" ng-click="ons.slidingMenu.setAbovePage('page4.html')"><img src="images/arr-l.png">Overview</a><a href="#" class="right" id="nxtexercise">Next Exercise<img src="images/arr-r.png"></a></div> -->
+<!-- <div class="full blue left"><a href="#" class="left" ng-click="ons.slidingMenu.setAbovePage('page4.html')"><img src="images/arr-l.png">Overview</a><a href="#" class="right" id="nxtexercise">Next Exercise<img src="images/arr-r.png"></a></div> -->
+<a href="#" class="full blue" style="text-align:center" onclick="return showmodalbox()">Start</a>
+</ons-tabbar>
+
+<style type="text/css">
+	.results .col i {
+	    color: #037a92;
+	    font-style: normal;
+	}
+
+	.rset{
+		padding-left: 10px;
+		padding-top: 10px;
+	}
+
+	.counter a img{
+		width:34px;
+	}
+
+
+	.modal.next .counter a img{
+		width: 15px
+	}
+
+	.wrkpg .counter{
+		/*margin-left: -5px;*/
+	}
+
+	.modal.next .counter a{
+		margin: 0 11px;
+	}
+
+	.homebtn0{
+		background: none repeat scroll 0 0 #0091ae;
+	    border-radius: 10px;
+	    color: #ecf0f1;
+	    display: block;
+	    margin: 0 20px;
+	    padding: 10px 0;
+	    font-size:14px !important;
+	}	
+
+</style>
